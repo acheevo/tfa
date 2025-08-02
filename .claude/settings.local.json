@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(go mod:*)",
+      "Bash(npm install:*)",
+      "Bash(make:*)",
+      "WebFetch(domain:localhost)",
+      "mcp__memory__search_code",
+      "mcp__memory__extract_code",
+      "Bash(go get:*)",
+      "Bash(go build:*)",
+      "Bash(find:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(grep:*)",
+      "Bash(go test:*)",
+      "Bash(cp:*)",
+      "Bash(timeout:*)",
+      "Bash(docker-compose logs:*)",
+      "Bash(docker-compose:*)",
+      "Bash(npm run build:*)",
+      "Bash(rm:*)",
+      "Bash(go list:*)",
+      "Bash(sed:*)",
+      "Bash(gofmt:*)",
+      "Bash(golangci-lint run:*)"
+    ],
+    "deny": []
+  }
+}

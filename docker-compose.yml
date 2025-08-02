@@ -1,0 +1,50 @@
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - ENVIRONMENT=development
+      - LOG_LEVEL=info
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=tfa
+      - DATABASE_SSL_MODE=disable
+      - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production-32chars-min
+      - JWT_ACCESS_TOKEN_DURATION=15m
+      - JWT_REFRESH_TOKEN_DURATION=7d
+      - EMAIL_FROM=noreply@localhost.dev
+      - EMAIL_PROVIDER=smtp
+      - SMTP_HOST=localhost
+      - SMTP_PORT=587
+      - FRONTEND_URL=http://localhost:3000
+      - BACKEND_URL=http://localhost:8080
+      - CSRF_SECRET=dev-csrf-secret-change-in-production-32chars-minimum
+      - BOOTSTRAP_ENABLED=true
+      - ADMIN_EMAIL=admin@example.com
+      - ADMIN_PASSWORD=admin123
+      - DEMO_USER_EMAIL=user@example.com
+      - DEMO_USER_PASSWORD=user1234
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=tfa
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
