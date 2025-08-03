@@ -27,7 +27,8 @@
       "Bash(ls:*)",
       "Bash(npm run dev:*)",
       "mcp__browsermcp__browser_navigate",
-      "mcp__browsermcp__browser_screenshot"
+      "mcp__browsermcp__browser_screenshot",
+      "Bash(touch:*)"
     ],
     "deny": []
   }

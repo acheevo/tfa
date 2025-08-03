@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Hero } from '../components';
+import { Header, Hero, Features } from '../components';
 
 /**
  * Landing page component that shows the marketing/landing content
@@ -10,6 +10,7 @@ const Landing: React.FC = () => {
     <>
       <Header />
       <Hero />
+      <Features />
     </>
   );
 };
