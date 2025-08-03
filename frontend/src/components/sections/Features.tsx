@@ -10,6 +10,8 @@ export default function Features() {
   const [isAnimating, setIsAnimating] = useState(false);
   const animationTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const forestRef = useRef<HTMLDivElement>(null);
 
   const cards = [
     {
@@ -109,6 +111,33 @@ export default function Features() {
     };
   }, []);
 
+  // Parallax scroll effect for forest background
+  useEffect(() => {
+    const handleScroll = () => {
+      if (forestRef.current) {
+        const rect = forestRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const elementTop = rect.top;
+        const elementBottom = rect.bottom;
+        
+        // Check if element is in viewport
+        if (elementBottom >= 0 && elementTop <= windowHeight) {
+          // Calculate relative scroll position
+          const scrollProgress = (windowHeight - elementTop) / (windowHeight + rect.height);
+          const parallaxOffset = scrollProgress * 200 - 100; // Adjust multiplier for effect strength
+          setScrollY(parallaxOffset);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial calculation
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -174,12 +203,7 @@ export default function Features() {
     });
     animationTimelineRef.current = tl;
 
-    // Get container bounds for safe positioning
-    const containerElement = containerRef.current;
-    const containerBounds = containerElement?.getBoundingClientRect();
-    const safetyMargin = 50; // pixels from container edge
-
-    cards.forEach((card, index) => {
+    cards.forEach((card) => {
       if (!card.ref.current) return;
       
       const cardElement = card.ref.current;
@@ -265,7 +289,7 @@ export default function Features() {
   };
 
   return (
-    <section className="py-24 bg-white relative" style={{ contain: 'layout' }}>
+    <section className="pt-24 pb-0 bg-white relative" style={{ contain: 'layout' }}>
       <div className="container mx-auto px-4 relative">
         {/* Divider - same as under H1 */}
         <div className="flex items-center justify-center mb-16">
@@ -288,10 +312,10 @@ export default function Features() {
 
         {/* Card Gallery and Description Container */}
         <div 
-          className="relative mb-20 overflow-hidden"
+          className="relative mb-20"
           role="main"
           aria-label="Interactive tarot card gallery"
-          style={{ minHeight: '600px' }}
+          style={{ minHeight: '600px', overflow: 'visible' }}
         >
           {/* Screen reader announcement for dynamic content */}
           <div 
@@ -303,7 +327,7 @@ export default function Features() {
           </div>
 
           {/* Main Content Container - Side by Side Layout */}
-          <div className={`flex ${selectedCard ? 'flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-12' : 'justify-center'} transition-all duration-800 relative`} style={{ minHeight: selectedCard ? '600px' : '500px' }}>
+          <div className={`flex ${selectedCard ? 'flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-12' : 'justify-center'} transition-all duration-800 relative`} style={{ minHeight: selectedCard ? '600px' : '500px', overflow: 'visible' }}>
             {/* Card Gallery */}
             <div 
               ref={containerRef}
@@ -336,7 +360,8 @@ export default function Features() {
                       left: '50%',
                       top: selectedCard ? '40%' : '50%',
                       transform: 'translate(-50%, -50%)',
-                      zIndex: 3 - index
+                      zIndex: selectedCard === card.id ? 1000 : (3 - index),
+                      overflow: 'visible'
                     }}
                     role="button"
                     tabIndex={isAnimating ? -1 : 0}
@@ -352,14 +377,15 @@ export default function Features() {
                     onKeyDown={(e) => handleCardKeyDown(e, card.id)}
                   >
                     {/* Card Container - Original sizing restored */}
-                    <div className="relative w-48 h-72 md:w-56 md:h-84 lg:w-64 lg:h-96">
+                    <div className="relative w-48 h-72 md:w-56 md:h-84 lg:w-64 lg:h-96" style={{ overflow: 'visible' }}>
                       {/* Inner card container for 3D flip */}
                       <div 
                         className="card-container relative w-full h-full rounded-lg"
                         style={{ 
                           transformStyle: 'preserve-3d',
                           perspective: '1200px',
-                          perspectiveOrigin: '50% 50%'
+                          perspectiveOrigin: '50% 50%',
+                          overflow: 'visible'
                         }}
                       >
                         {/* Card Back */}
@@ -397,7 +423,7 @@ export default function Features() {
             {/* Card Description Section - Side by Side */}
             {selectedCard && (
               <div className="flex-1 max-w-full lg:max-w-2xl order-2 lg:order-none mt-8 lg:mt-0">
-                <div className="bg-gray-50/50 rounded-2xl p-6 lg:p-8 shadow-sm" id={`${selectedCard}-description`} role="region" aria-label="Card description">
+                <div className="p-6 lg:p-8" id={`${selectedCard}-description`} role="region" aria-label="Card description">
                   <h3 className="text-3xl md:text-4xl font-cinzel font-bold mb-6 bg-gradient-to-r from-teal-600 to-cyan-700 bg-clip-text text-transparent">
                     {cards.find(card => card.id === selectedCard)?.title}
                   </h3>
@@ -431,76 +457,97 @@ export default function Features() {
           </div>
 
         </div>
+      </div>
 
-        {/* Feature highlights */}
-        <div className="relative max-w-6xl mx-auto">
-          {/* Content container */}
-          <div className="relative p-12 md:p-16">
+      {/* Arcane Mastery Section - Full Width */}
+      <div 
+        ref={forestRef}
+        className="relative mt-24 mb-0 overflow-hidden"
+        style={{
+          minHeight: '800px'
+        }}
+      >
+        {/* Parallax Background */}
+        <div 
+          className="absolute inset-0 w-full"
+          style={{
+            backgroundImage: 'url(/src/assets/img/forest2.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center top',
+            backgroundRepeat: 'no-repeat',
+            transform: `translateY(${scrollY * 0.5}px)`,
+            height: '120%',
+            top: '-10%'
+          }}
+        />
+        {/* Content container - centered without overlay */}
+        <div className="relative min-h-[800px] flex items-center justify-center py-16">
+          <div className="container mx-auto px-4 text-center">
               {/* Section title */}
               <div className="text-center mb-12">
-                <h3 className="text-3xl md:text-4xl font-cinzel font-bold text-gray-800 mb-4 bg-gradient-to-r from-teal-700 to-cyan-800 bg-clip-text text-transparent">
+                <h3 className="text-3xl md:text-4xl font-cinzel font-bold mb-4 bg-gradient-to-r from-teal-600 to-cyan-700 bg-clip-text text-transparent">
                   Arcane Mastery
                 </h3>
                 <div className="flex items-center justify-center mb-6">
-                  <div className="h-px bg-gradient-to-r from-transparent via-teal-400 to-transparent w-16"></div>
-                  <div className="mx-4 text-teal-600 text-xl">❦</div>
-                  <div className="h-px bg-gradient-to-r from-transparent via-teal-400 to-transparent w-16"></div>
+                  <div className="h-px bg-gray-400 w-24"></div>
+                  <div className="mx-4 text-gray-600 text-2xl">❦</div>
+                  <div className="h-px bg-gray-400 w-24"></div>
                 </div>
-                <p className="text-lg text-gray-700 font-cormorant max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-gray-700 font-cormorant max-w-4xl mx-auto leading-relaxed">
                   Unlock the ancient secrets and master the mystical arts that await your discovery
                 </p>
               </div>
 
                              {/* Feature grid */}
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                 <div className="text-center group">
-                   <div className="mb-6">
-                     <img 
-                       src="/src/assets/img/spellbook.png" 
-                       alt="Spellbook" 
-                       className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
-                     />
+                 <div className="grid grid-cols-1 md:grid-cols-3 py-8" style={{gap: '0px'}}>
+                   <div className="text-center group p-0">
+                     <div className="mb-6">
+                       <img 
+                         src="/src/assets/img/spellbook.png" 
+                         alt="Spellbook" 
+                         className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+                       />
+                     </div>
+                     <h4 className="text-xl font-cinzel font-bold text-gray-900 mb-4 group-hover:text-teal-600 transition-colors duration-300 drop-shadow-sm">
+                       Mystical Arts
+                     </h4>
+                     <p className="text-gray-800 font-cormorant leading-relaxed drop-shadow-sm max-w-xs mx-auto">
+                       Master ancient spells and unlock the secrets of arcane knowledge through intuitive gameplay.
+                     </p>
                    </div>
-                   <h4 className="text-xl font-cinzel font-bold text-gray-800 mb-4 group-hover:text-teal-700 transition-colors duration-300">
-                     Mystical Arts
-                   </h4>
-                   <p className="text-gray-600 font-cormorant leading-relaxed">
-                     Master ancient spells and unlock the secrets of arcane knowledge through intuitive gameplay.
-                   </p>
-                 </div>
-                 
-                 <div className="text-center group">
-                   <div className="mb-6">
-                     <img 
-                       src="/src/assets/img/dungeon.png" 
-                       alt="Dungeon" 
-                       className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
-                     />
+                   
+                   <div className="text-center group p-0">
+                     <div className="mb-6">
+                       <img 
+                         src="/src/assets/img/dungeon.png" 
+                         alt="Dungeon" 
+                         className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+                       />
+                     </div>
+                     <h4 className="text-xl font-cinzel font-bold text-gray-900 mb-4 group-hover:text-teal-600 transition-colors duration-300 drop-shadow-sm">
+                       Epic Dungeons
+                     </h4>
+                     <p className="text-gray-800 font-cormorant leading-relaxed drop-shadow-sm max-w-xs mx-auto">
+                       Explore mysterious realms filled with challenging puzzles and hidden treasures.
+                     </p>
                    </div>
-                   <h4 className="text-xl font-cinzel font-bold text-gray-800 mb-4 group-hover:text-teal-700 transition-colors duration-300">
-                     Epic Dungeons
-                   </h4>
-                   <p className="text-gray-600 font-cormorant leading-relaxed">
-                     Explore mysterious realms filled with challenging puzzles and hidden treasures.
-                   </p>
-                 </div>
-                 
-                 <div className="text-center group">
-                   <div className="mb-6">
-                     <img 
-                       src="/src/assets/img/destiny.png" 
-                       alt="Destiny" 
-                       className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
-                     />
+                   
+                   <div className="text-center group p-0">
+                     <div className="mb-6">
+                       <img 
+                         src="/src/assets/img/destiny.png" 
+                         alt="Destiny" 
+                         className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+                       />
+                     </div>
+                     <h4 className="text-xl font-cinzel font-bold text-gray-900 mb-4 group-hover:text-teal-600 transition-colors duration-300 drop-shadow-sm">
+                       Forge Your Destiny
+                     </h4>
+                     <p className="text-gray-800 font-cormorant leading-relaxed drop-shadow-sm max-w-xs mx-auto">
+                       Every choice influences your path in this dynamic world of consequence and adventure.
+                     </p>
                    </div>
-                   <h4 className="text-xl font-cinzel font-bold text-gray-800 mb-4 group-hover:text-teal-700 transition-colors duration-300">
-                     Forge Your Destiny
-                   </h4>
-                   <p className="text-gray-600 font-cormorant leading-relaxed">
-                     Every choice influences your path in this dynamic world of consequence and adventure.
-                   </p>
                  </div>
-               </div>
           </div>
         </div>
       </div>

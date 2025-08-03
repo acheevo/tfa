@@ -153,8 +153,6 @@ export default function Hero() {
       // Enhanced particles emanating from text animation
       particles.forEach((particle, i) => {
         const isFromFirstLine = i < 7; // Adjusted for reduced particle count (was 15, now 7)
-        const isLargeStar = particle.innerHTML === '✦';
-        const isTinyStar = particle.innerHTML && particle.innerHTML !== '✦' && particle.style.fontSize;
         
         // Ethereal floating movement - more mystical than mechanical
         gsap.to(particle, {
