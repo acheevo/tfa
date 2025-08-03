@@ -230,7 +230,7 @@ export default function Hero() {
         }}
       >
         <img 
-          src="/src/assets/img/hero_woback.png" 
+          src="/assets/img/hero_woback.png" 
           alt="Hero Characters" 
           className="w-auto object-contain"
           style={{ height: '112.5%' }}
@@ -282,7 +282,7 @@ export default function Hero() {
           <button 
             className="relative font-cormorant font-bold text-2xl"
             style={{
-              backgroundImage: 'url(/src/assets/img/button.png)',
+              backgroundImage: 'url(/assets/img/button.png)',
               backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',

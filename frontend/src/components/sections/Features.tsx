@@ -17,8 +17,8 @@ export default function Features() {
     {
       id: 'magician',
       title: 'The Magician',
-      frontImage: '/src/assets/img/magician.png',
-      backImage: '/src/assets/img/card_background.png',
+      frontImage: '/assets/img/magician.png',
+      backImage: '/assets/img/card_background.png',
       ref: card1Ref,
       description: {
         story: "In the ancient halls of the Arcane Academy, the Magician stands as the master of manifestation. With the power to transform thought into reality, this card represents the bridge between the spiritual and material worlds. When drawn, it signifies the awakening of your latent magical abilities and the beginning of your journey into the mystical arts.",
@@ -28,8 +28,8 @@ export default function Features() {
     {
       id: 'strength',
       title: 'Strength',
-      frontImage: '/src/assets/img/strenght.png',
-      backImage: '/src/assets/img/card_background.png',
+      frontImage: '/assets/img/strenght.png',
+      backImage: '/assets/img/card_background.png',
       ref: card2Ref,
       description: {
         story: "The Strength card embodies the courage that lies within every warrior's heart. Not merely physical might, but the inner fortitude to face impossible odds and emerge victorious. This card tells the tale of those who have mastered their fears and channeled their determination into unstoppable force.",
@@ -39,8 +39,8 @@ export default function Features() {
     {
       id: 'highpriestess',
       title: 'The High Priestess',
-      frontImage: '/src/assets/img/highpriestess.png',
-      backImage: '/src/assets/img/card_background.png',
+      frontImage: '/assets/img/highpriestess.png',
+      backImage: '/assets/img/card_background.png',
       ref: card3Ref,
       description: {
         story: "The High Priestess guards the sacred knowledge of the ancients, her wisdom spanning countless generations. She represents the intuitive understanding that transcends logic, the deep connection to the mystical forces that govern the universe. Her presence heralds the revelation of hidden truths and the awakening of your spiritual sight.",
@@ -471,7 +471,7 @@ export default function Features() {
         <div 
           className="absolute inset-0 w-full"
           style={{
-            backgroundImage: 'url(/src/assets/img/forest2.png)',
+            backgroundImage: 'url(/assets/img/Forest2.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center top',
             backgroundRepeat: 'no-repeat',
@@ -503,7 +503,7 @@ export default function Features() {
                    <div className="text-center group p-0">
                      <div className="mb-6">
                        <img 
-                         src="/src/assets/img/spellbook.png" 
+                         src="/assets/img/Spellbook.png" 
                          alt="Spellbook" 
                          className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
                        />
@@ -519,7 +519,7 @@ export default function Features() {
                    <div className="text-center group p-0">
                      <div className="mb-6">
                        <img 
-                         src="/src/assets/img/dungeon.png" 
+                         src="/assets/img/Dungeon.png" 
                          alt="Dungeon" 
                          className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
                        />
@@ -535,7 +535,7 @@ export default function Features() {
                    <div className="text-center group p-0">
                      <div className="mb-6">
                        <img 
-                         src="/src/assets/img/destiny.png" 
+                         src="/assets/img/Destiny.png" 
                          alt="Destiny" 
                          className="w-16 h-16 mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
                        />

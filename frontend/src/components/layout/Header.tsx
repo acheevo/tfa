@@ -8,7 +8,7 @@ export default function Header() {
         <div className="flex flex-col items-center">
           <div className="mb-4 md:mb-6">
             <img 
-              src="/src/assets/img/logo.png" 
+              src="/assets/img/logo.png" 
               alt="The Fool's Ascension" 
               className="h-24 md:h-32 lg:h-36 w-auto"
             />

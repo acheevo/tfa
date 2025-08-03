@@ -24,7 +24,7 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="md:col-span-1">
             <img 
-              src="/src/assets/img/logo.png" 
+              src="/assets/img/logo.png" 
               alt="The Fool's Ascension" 
               className="h-20 w-auto mb-4"
             />
