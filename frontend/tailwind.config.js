@@ -87,8 +87,10 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Cal Sans', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Cormorant Upright', 'serif'],
+        heading: ['Cinzel Decorative', 'cursive'],
+        cormorant: ['Cormorant Upright', 'serif'],
+        cinzel: ['Cinzel Decorative', 'cursive'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1rem' }],

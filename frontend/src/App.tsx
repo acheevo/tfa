@@ -4,7 +4,7 @@ import { Header, Footer, Sidebar } from '@/components';
 import { AuthProvider } from './contexts/AuthContext';
 import { RBACProvider } from './contexts/RBACContext';
 import { ProtectedRoute, PublicRoute, AdminRoute } from './components/routing';
-import { LoadingSpinner } from './components/ui/LoadingSpinner';
+import { LoadingSpinner, CursorEffect } from './components/ui';
 
 // Lazy load components for better performance
 const Landing = React.lazy(() => import('./pages/Landing'));
@@ -51,6 +51,7 @@ function App() {
   return (
     <AuthProvider>
       <RBACProvider>
+        <CursorEffect />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* Public Routes - Only accessible when not authenticated */}

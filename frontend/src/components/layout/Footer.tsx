@@ -1,4 +1,6 @@
 
+import { SocialIcon } from '../ui/SocialIcons';
+
 export default function Footer() {
   const footerLinks = {
     'Game': ['Features', 'Classes', 'Races', 'World Map'],
@@ -6,6 +8,14 @@ export default function Footer() {
     'Support': ['Help Center', 'Contact Us', 'Bug Report', 'FAQ'],
     'Legal': ['Terms of Service', 'Privacy Policy', 'Cookie Policy', 'EULA']
   };
+
+  const socialLinks = [
+    { platform: 'youtube' as const, href: 'https://youtube.com/@thefoolsascension' },
+    { platform: 'discord' as const, href: 'https://discord.gg/thefoolsascension' },
+    { platform: 'instagram' as const, href: 'https://instagram.com/thefoolsascension' },
+    { platform: 'x' as const, href: 'https://x.com/thefoolsascension' },
+    { platform: 'reddit' as const, href: 'https://reddit.com/r/thefoolsascension' }
+  ];
 
   return (
     <footer className="bg-gradient-to-b from-slate-50 to-gray-100 text-gray-800 py-16 border-t border-teal-200">
@@ -18,7 +28,7 @@ export default function Footer() {
               alt="The Fool's Ascension" 
               className="h-20 w-auto mb-4"
             />
-            <p className="text-gray-600 text-sm font-cinzel">
+            <p className="text-gray-600 text-sm font-cormorant">
               Embark on an epic journey in a world of magic and mystery.
             </p>
           </div>
@@ -32,7 +42,7 @@ export default function Footer() {
                   <li key={link}>
                     <a 
                       href="#" 
-                      className="text-gray-600 hover:text-teal-700 text-sm transition-colors duration-200 font-cinzel"
+                      className="text-gray-600 hover:text-teal-700 text-sm transition-colors duration-200 font-cormorant"
                     >
                       {link}
                     </a>
@@ -46,21 +56,18 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-teal-200 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-600 text-sm mb-4 md:mb-0 font-cinzel">
+            <p className="text-gray-600 text-sm mb-4 md:mb-0 font-cormorant">
               © 2025 The Fool's Ascension. All rights reserved.
             </p>
             
             {/* Social Links */}
             <div className="flex space-x-6">
-              {['Twitter', 'Facebook', 'Instagram', 'YouTube'].map((social) => (
-                <a 
-                  key={social}
-                  href="#" 
-                  className="text-gray-500 hover:text-teal-600 transition-colors duration-200"
-                >
-                  <span className="sr-only">{social}</span>
-                  <div className="w-6 h-6 bg-gradient-to-r from-teal-200 to-cyan-200 rounded-full hover:from-teal-300 hover:to-cyan-300 transition-all duration-200"></div>
-                </a>
+              {socialLinks.map((social) => (
+                <SocialIcon
+                  key={social.platform}
+                  platform={social.platform}
+                  href={social.href}
+                />
               ))}
             </div>
           </div>

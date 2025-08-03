@@ -18,51 +18,51 @@ export default function Hero() {
     if (line1Ref.current && line2Ref.current && particlesRef.current) {
       // Create magical particles emanating from title
       const particles: HTMLDivElement[] = [];
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 12; i++) { // Reduced from 25 to 12 particles (50% reduction)
         const particle = document.createElement('div');
         particle.className = 'absolute pointer-events-none';
         const size = Math.random() * 8 + 4; // Larger, more visible particles (4-12px)
         
         // Create different particle shapes
         const shapeType = Math.random();
-        const isFromFirstLine = i < 15;
+        const isFromFirstLine = i < 7; // Adjusted for reduced particle count (was 15, now 7)
         
         if (shapeType < 0.4) {
-          // Large star/sparkle shape - 30% less intense
-          particle.innerHTML = '✦';
-          particle.style.fontSize = size + 'px';
+          // Ethereal wisps - more mystical than stars
+          particle.innerHTML = '~';
+          particle.style.fontSize = (size * 1.2) + 'px';
           particle.style.textAlign = 'center';
           particle.style.lineHeight = '1';
           particle.style.color = isFromFirstLine 
-            ? `rgba(20, 184, 166, ${0.56 + Math.random() * 0.14})` // Reduced from 0.8-1.0 to 0.56-0.7
-            : `rgba(71, 85, 105, ${0.56 + Math.random() * 0.14})`;
+            ? `rgba(20, 184, 166, ${0.3 + Math.random() * 0.2})` // Teal/cyan for first line
+            : `rgba(51, 65, 85, ${0.3 + Math.random() * 0.2})`; // Slate for second line
           particle.style.textShadow = isFromFirstLine
-            ? '0 0 6px rgba(20, 184, 166, 0.63), 0 0 8px rgba(20, 184, 166, 0.42)' // Reduced by 30%
-            : '0 0 6px rgba(71, 85, 105, 0.63), 0 0 8px rgba(71, 85, 105, 0.42)';
+            ? '0 0 8px rgba(20, 184, 166, 0.4), 0 0 12px rgba(20, 184, 166, 0.2)' // Teal/cyan glow
+            : '0 0 8px rgba(51, 65, 85, 0.4), 0 0 12px rgba(51, 65, 85, 0.2)'; // Slate glow
         } else if (shapeType < 0.7) {
-          // Tiny star shape - different from large stars
-          const starSymbols = ['✧', '✩', '✪', '⋆', '☆'];
-          particle.innerHTML = starSymbols[Math.floor(Math.random() * starSymbols.length)];
-          particle.style.fontSize = (size * 0.7) + 'px'; // Slightly smaller than main stars
+          // Mystical runes - fantasy symbols
+          const runeSymbols = ['◊', '◇', '○', '●', '◐', '◑'];
+          particle.innerHTML = runeSymbols[Math.floor(Math.random() * runeSymbols.length)];
+          particle.style.fontSize = (size * 0.8) + 'px';
           particle.style.textAlign = 'center';
           particle.style.lineHeight = '1';
           particle.style.color = isFromFirstLine 
-            ? `rgba(20, 184, 166, ${0.56 + Math.random() * 0.14})`
-            : `rgba(71, 85, 105, ${0.56 + Math.random() * 0.14})`;
+            ? `rgba(20, 184, 166, ${0.25 + Math.random() * 0.15})` // Teal/cyan for first line
+            : `rgba(51, 65, 85, ${0.25 + Math.random() * 0.15})`; // Slate for second line
           particle.style.textShadow = isFromFirstLine
-            ? '0 0 4px rgba(20, 184, 166, 0.63), 0 0 6px rgba(20, 184, 166, 0.42)'
-            : '0 0 4px rgba(71, 85, 105, 0.63), 0 0 6px rgba(71, 85, 105, 0.42)';
+            ? '0 0 6px rgba(20, 184, 166, 0.3), 0 0 10px rgba(20, 184, 166, 0.15)' // Teal/cyan glow
+            : '0 0 6px rgba(51, 65, 85, 0.3), 0 0 10px rgba(51, 65, 85, 0.15)'; // Slate glow
         } else {
-          // Enhanced orb shape - 30% less intense
+          // Ethereal orbs - more mystical than bright
           particle.style.width = size + 'px';
           particle.style.height = size + 'px';
           particle.style.borderRadius = '50%';
           particle.style.background = isFromFirstLine
-            ? `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.63) 0%, rgba(20, 184, 166, 0.63) 30%, rgba(20, 184, 166, 0.42) 70%, transparent 100%)` // Reduced by 30%
-            : `radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.56) 0%, rgba(71, 85, 105, 0.63) 30%, rgba(71, 85, 105, 0.42) 70%, transparent 100%)`;
+            ? `radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.2) 0%, rgba(20, 184, 166, 0.3) 40%, rgba(20, 184, 166, 0.15) 80%, transparent 100%)` // Teal/cyan gradient
+            : `radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.15) 0%, rgba(51, 65, 85, 0.3) 40%, rgba(51, 65, 85, 0.15) 80%, transparent 100%)`; // Slate gradient
           particle.style.boxShadow = isFromFirstLine
-            ? '0 0 10px rgba(20, 184, 166, 0.63), inset 0 0 6px rgba(255, 255, 255, 0.21)' // Reduced by 30%
-            : '0 0 10px rgba(71, 85, 105, 0.63), inset 0 0 6px rgba(255, 255, 255, 0.21)';
+            ? '0 0 8px rgba(20, 184, 166, 0.3), inset 0 0 4px rgba(255, 255, 255, 0.1)' // Teal/cyan glow
+            : '0 0 8px rgba(51, 65, 85, 0.3), inset 0 0 4px rgba(255, 255, 255, 0.1)'; // Slate glow
         }
         
         // Position particles closer to title area - constrained to avoid subtitle
@@ -94,117 +94,117 @@ export default function Hero() {
         rotation: 0
       });
 
-      // Create magical reveal timeline - slower and more dramatic
-      const tl = gsap.timeline({ delay: 0.8 });
+      // Create magical reveal timeline - immediate start
+      const tl = gsap.timeline({ delay: 0 });
 
-      // Magical particle entrance
+      // Magical particle entrance - starts immediately
       tl.to(particles, {
-        duration: 2.0,
+        duration: 0.6,
         opacity: 0.7, // More visible
         scale: 1,
         rotation: 360,
         ease: "power2.out",
         stagger: {
-          amount: 1.5,
+          amount: 0.4,
           from: "random"
         }
       })
       
-      // First line - magical materialization (slower)
+      // First line - magical materialization (slower and more magical)
       .to(line1Ref.current, {
-        duration: 2.0,
+        duration: 1.3,
         opacity: 1,
         scale: 1,
         rotationY: 0,
         ease: "power3.out",
         onStart: () => {
-          // Enhanced magical glow
+          // Ethereal magical glow - more mystical than bright
           gsap.fromTo(line1Ref.current,
-            { filter: "drop-shadow(0 0 25px rgba(20, 184, 166, 0.8)) drop-shadow(0 0 40px rgba(20, 184, 166, 0.4))" },
+            { filter: "drop-shadow(0 0 20px rgba(20, 184, 166, 0.4)) drop-shadow(0 0 30px rgba(20, 184, 166, 0.2))" },
             { 
-              filter: "drop-shadow(0 0 5px rgba(20, 184, 166, 0.3))",
-              duration: 2.5,
+              filter: "drop-shadow(0 0 3px rgba(20, 184, 166, 0.2))",
+              duration: 2.0,
               ease: "power2.out"
             }
           );
         }
-      }, "-=1.0")
+      }, "-=0.3")
       
-      // Second line - enchanted manifestation (slower)
+      // Second line - enchanted manifestation (starts 0.2s after first line)
       .to(line2Ref.current, {
-        duration: 1.8,
+        duration: 0.7,
         opacity: 1,
         scale: 1,
         rotationY: 0,
         ease: "back.out(1.4)",
         onStart: () => {
-          // Enhanced magical glow
+          // Ethereal magical glow - more mystical than bright
           gsap.fromTo(line2Ref.current,
-            { filter: "drop-shadow(0 0 30px rgba(71, 85, 105, 0.9)) drop-shadow(0 0 50px rgba(71, 85, 105, 0.5))" },
+            { filter: "drop-shadow(0 0 25px rgba(71, 85, 105, 0.4)) drop-shadow(0 0 35px rgba(71, 85, 105, 0.2))" },
             { 
-              filter: "drop-shadow(0 0 8px rgba(71, 85, 105, 0.4))",
-              duration: 3.0,
+              filter: "drop-shadow(0 0 4px rgba(71, 85, 105, 0.2))",
+              duration: 1.8,
               ease: "power2.out"
             }
           );
         }
-      }, "-=0.8");
+      }, "+=0.2");
 
       // Enhanced particles emanating from text animation
       particles.forEach((particle, i) => {
-        const isFromFirstLine = i < 15;
+        const isFromFirstLine = i < 7; // Adjusted for reduced particle count (was 15, now 7)
         const isLargeStar = particle.innerHTML === '✦';
         const isTinyStar = particle.innerHTML && particle.innerHTML !== '✦' && particle.style.fontSize;
         
-        // Constrained emanating movement - stays around title area
+        // Ethereal floating movement - more mystical than mechanical
         gsap.to(particle, {
-          y: isFromFirstLine ? `+=${Math.random() * 20 + 10}` : `+=${Math.random() * 15 + 8}`, // Reduced upward movement
-          x: `+=${(Math.random() - 0.5) * 40}`, // Reduced horizontal spread
-          rotation: (isLargeStar || isTinyStar) ? `+=${Math.random() * 720 + 360}` : `+=${Math.random() * 360}`, // All stars spin more
-          duration: Math.random() * 8 + 5, // Even slower, more majestic
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: Math.random() * 3
-        });
-        
-        // Toned down magical pulsing - 30% reduction
-        const baseOpacity = isFromFirstLine ? 0.56 : 0.49; // Reduced base opacity by 30%
-        gsap.to(particle, {
-          opacity: baseOpacity + Math.random() * 0.21, // Reduced from 0.3 to 0.21
-          scale: (isLargeStar || isTinyStar) ? 0.6 + Math.random() * 0.8 : 0.7 + Math.random() * 0.6, // All stars pulse more dramatically
-          duration: Math.random() * 4 + 2,
+          y: isFromFirstLine ? `+=${Math.random() * 15 + 8}` : `+=${Math.random() * 12 + 6}`, // Gentler floating
+          x: `+=${(Math.random() - 0.5) * 25}`, // Subtle horizontal drift
+          rotation: `+=${Math.random() * 180 + 90}`, // Gentle rotation
+          duration: Math.random() * 10 + 8, // Slower, more ethereal
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
           delay: Math.random() * 4
         });
         
-        // Reduced sparkle effect - 30% less intense
-        if (Math.random() > 0.6) { // Reduced frequency from 50% to 40%
-          if (isLargeStar || isTinyStar) {
-            // Toned down twinkling for all stars
+        // Ethereal breathing effect - more mystical than pulsing
+        const baseOpacity = isFromFirstLine ? 0.3 : 0.25; // Much more subtle
+        gsap.to(particle, {
+          opacity: baseOpacity + Math.random() * 0.15, // Very gentle variation
+          scale: 0.8 + Math.random() * 0.4, // Subtle breathing
+          duration: Math.random() * 6 + 4, // Slower, more mystical
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: Math.random() * 5
+        });
+        
+        // Mystical shimmer effect - very subtle and ethereal
+        if (Math.random() > 0.7) { // Rare mystical shimmer
+          if (particle.innerHTML === '~') {
+            // Ethereal wisp shimmer
             gsap.to(particle, {
               textShadow: isFromFirstLine 
-                ? '0 0 10px rgba(20, 184, 166, 0.7), 0 0 18px rgba(20, 184, 166, 0.56), 0 0 25px rgba(20, 184, 166, 0.42)' // Reduced by 30%
-                : '0 0 10px rgba(71, 85, 105, 0.7), 0 0 18px rgba(71, 85, 105, 0.56), 0 0 25px rgba(71, 85, 105, 0.42)',
-              duration: 0.3,
+                ? '0 0 12px rgba(20, 184, 166, 0.3), 0 0 20px rgba(20, 184, 166, 0.15)' // Teal/cyan shimmer
+                : '0 0 12px rgba(51, 65, 85, 0.3), 0 0 20px rgba(51, 65, 85, 0.15)', // Slate shimmer
+              duration: 2.0,
               repeat: -1,
               yoyo: true,
-              ease: "power2.inOut",
-              delay: Math.random() * 6
+              ease: "sine.inOut",
+              delay: Math.random() * 8
             });
-          } else {
-            // Reduced glow for orbs
+          } else if (particle.style.background) {
+            // Ethereal orb shimmer
             gsap.to(particle, {
               filter: isFromFirstLine 
-                ? "brightness(1.26) drop-shadow(0 0 6px rgba(20, 184, 166, 0.7)) drop-shadow(0 0 11px rgba(20, 184, 166, 0.42))" // Reduced by 30%
-                : "brightness(1.12) drop-shadow(0 0 6px rgba(71, 85, 105, 0.7)) drop-shadow(0 0 11px rgba(71, 85, 105, 0.42))",
-              duration: 0.4,
+                ? "brightness(1.1) drop-shadow(0 0 8px rgba(20, 184, 166, 0.2))" // Teal/cyan shimmer
+                : "brightness(1.05) drop-shadow(0 0 8px rgba(51, 65, 85, 0.2))", // Slate shimmer
+              duration: 3.0,
               repeat: -1,
               yoyo: true,
-              ease: "power2.inOut",
-              delay: Math.random() * 5
+              ease: "sine.inOut",
+              delay: Math.random() * 6
             });
           }
         }
@@ -252,20 +252,20 @@ export default function Hero() {
           <h1 
             ref={titleRef}
             className="font-cinzel font-bold text-gray-800 mb-6 md:mb-8 tracking-wide drop-shadow-sm text-4xl md:text-6xl lg:text-7xl xl:text-8xl"
-            style={{fontSize: 'clamp(48px, 8vw, 80px)'}}
+            style={{fontSize: 'clamp(48px, 8vw, 80px)', paddingTop: '24px', paddingBottom: '24px'}}
           >
           <span 
             ref={line1Ref}
             className="bg-gradient-to-r from-teal-600 via-cyan-700 to-teal-800 bg-clip-text text-transparent inline-block"
           >
-            ASCEND BEYOND
+            Ascend Beyond
           </span>
           <br />
           <span 
             ref={line2Ref}
             className="bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 bg-clip-text text-transparent inline-block"
           >
-            FATE
+            Fate
           </span>
         </h1>
         
@@ -275,14 +275,14 @@ export default function Hero() {
             <div className="mx-4 text-gray-600 text-2xl">❦</div>
             <div className="h-px bg-gray-400 w-24"></div>
           </div>
-          <p className="text-lg md:text-xl text-gray-700 font-cinzel max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-700 font-cormorant max-w-3xl mx-auto">
             Master ancient arts, explore mystical dungeons, and forge your destiny in a world where every choice shapes your arcane path
           </p>
         </div>
 
         <div className="flex justify-center">
           <button 
-            className="relative font-cinzel font-bold text-2xl"
+            className="relative font-cormorant font-bold text-2xl"
             style={{
               backgroundImage: 'url(/src/assets/img/button.png)',
               backgroundSize: 'contain',
@@ -302,7 +302,7 @@ export default function Hero() {
             onMouseEnter={(e) => e.currentTarget.style.color = '#4a7d6b'}
             onMouseLeave={(e) => e.currentTarget.style.color = '#b7bd97'}
           >
-            JOIN BETA
+            Join Beta
           </button>
         </div>
         </div>

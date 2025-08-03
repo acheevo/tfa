@@ -1,6 +1,6 @@
 
 export default function Header() {
-  const menuItems = ['HOME', 'PAGES', 'FORUM', 'PORTFOLIO', 'BLOG', 'SHOP', 'ELEMENTS'];
+  const menuItems = ['Home', 'Pages', 'Forum', 'Portfolio', 'Blog', 'Shop', 'Elements'];
 
   return (
     <header className="absolute top-0 w-full z-50 py-4 md:py-8">
@@ -19,9 +19,10 @@ export default function Header() {
                 <li key={item}>
                   <a 
                     href="#" 
-                    className="text-gray-700 text-xs md:text-sm font-uncial hover:text-gray-900 transition-colors duration-300 tracking-wider"
+                    className="text-gray-700 text-sm md:text-base font-uncial hover:text-gray-900 transition-colors duration-300 tracking-wider relative group"
                   >
                     {item}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-teal-600 via-cyan-700 to-teal-800 transition-all duration-500 ease-out group-hover:w-[35%]"></span>
                   </a>
                 </li>
               ))}
