@@ -42,10 +42,7 @@ const PublicLayout: React.FC<{ children: React.ReactNode; showFooter?: boolean }
   showFooter = true 
 }) => (
   <div className="min-h-screen flex flex-col">
-    <Header />
-    <div className="flex-grow">
-      {children}
-    </div>
+    {children}
     {showFooter && <Footer />}
   </div>
 );

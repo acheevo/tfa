@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hero, Features, CTA } from '../components';
+import { Header, Hero } from '../components';
 
 /**
  * Landing page component that shows the marketing/landing content
@@ -7,11 +7,10 @@ import { Hero, Features, CTA } from '../components';
  */
 const Landing: React.FC = () => {
   return (
-    <main className="flex-grow">
+    <>
+      <Header />
       <Hero />
-      <Features />
-      <CTA />
-    </main>
+    </>
   );
 };
 
